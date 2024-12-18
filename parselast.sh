@@ -5,7 +5,7 @@
 # Uses domain NAMES, but that's fine
 # because you cache DNS, right?
 #
-# Blame: phil@slug.org
+# Blame: helmut.doring@slug.org
 #
 
 ## Right way to init associative array.
