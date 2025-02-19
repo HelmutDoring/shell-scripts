@@ -6,7 +6,12 @@
 ## Blame: helmut.doring@slug.org
 ##
 
-mountpoint='/root/mount'
+if [ "${#1}" -eq 0 ]; then
+  echo "Usage: $0 /mnt/point"
+  exit
+fi
+
+mountpoint="$1"
 
 # Just some decoration
 baton() {
@@ -21,11 +26,12 @@ baton() {
 }
 
 # Necessary to avoid collisions
+echo "--"
 tmpdir=`mktemp -d`
 mkdir -v -p -- "$mountpoint$tmpdir"
 tmpfile=`mktemp --tmpdir=$tmpdir`
-echo '--'
 
+echo '--'
 echo "WRITE data to $tmpfile:"
 dd conv=fsync if=/dev/zero of="$tmpfile" bs=1M count=1024
 echo '--'
@@ -44,3 +50,4 @@ echo '--'
 
 echo 'Cleaning up:'
 rm -r -f -v -- "$tmpdir" "$mountpoint$tmpdir"
+echo "--"
